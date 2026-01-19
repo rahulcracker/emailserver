@@ -1,0 +1,214 @@
+<?php
+
+/* Local configuration for Roundcube Webmail */
+
+// ----------------------------------
+
+// SQL DATABASE
+
+// ----------------------------------
+
+// Database connection string (DSN) for read+write operations
+
+// Format (compatible with PEAR MDB2): db_provider://user:password@host/database
+
+// Currently supported db_providers: mysql, pgsql, sqlite, mssql, sqlsrv, oracle
+
+// For examples see http://pear.php.net/manual/en/package.database.mdb2.intro-dsn.php
+
+// Note: for SQLite use absolute path (Linux): 'sqlite:////full/path/to/sqlite.db?mode=0646'
+
+//       or (Windows): 'sqlite:///C:/full/path/to/sqlite.db'
+
+// Note: Various drivers support various additional arguments for connection,
+
+//       for Mysql: key, cipher, cert, capath, ca, verify_server_cert,
+
+//       for Postgres: application_name, sslmode, sslcert, sslkey, sslrootcert, sslcrl, sslcompression, service.
+
+//       e.g. 'mysql://roundcube:@localhost/roundcubemail?verify_server_cert=false'
+
+$config['db_dsnw'] = 'mysql://roundcube:roundcube@localhost/roundcube';
+
+// you can define specific table (and sequence) names prefix
+
+$config['db_prefix'] = '';
+
+// ----------------------------------
+
+// IMAP
+
+// ----------------------------------
+
+// The IMAP host chosen to perform the log-in.
+
+// Leave blank to show a textbox at login, give a list of hosts
+
+// to display a pulldown menu or set one host as string.
+
+// Enter hostname with prefix ssl:// to use Implicit TLS, or use
+
+// prefix tls:// to use STARTTLS.
+
+// Supported replacement variables:
+
+// %n - hostname ($_SERVER['SERVER_NAME'])
+
+// %t - hostname without the first part
+
+// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
+
+// %s - domain name after the '@' from e-mail address provided at login screen
+
+// For example %n = mail.domain.tld, %t = domain.tld
+
+// WARNING: After hostname change update of mail_host column in users table is
+
+//          required to match old user data records with the new host.
+
+$config['default_host'] = 'localhost';
+
+// ----------------------------------
+
+// SMTP
+
+// ----------------------------------
+
+// SMTP server host (for sending mails).
+
+// Enter hostname with prefix ssl:// to use Implicit TLS, or use
+
+// prefix tls:// to use STARTTLS.
+
+// Supported replacement variables:
+
+// %h - user's IMAP hostname
+
+// %n - hostname ($_SERVER['SERVER_NAME'])
+
+// %t - hostname without the first part
+
+// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
+
+// %z - IMAP domain (IMAP hostname without the first part)
+
+// For example %n = mail.domain.tld, %t = domain.tld
+
+// To specify different SMTP servers for different IMAP hosts provide an array
+
+// of IMAP host (no prefix or port) and SMTP server e.g. ['imap.example.com' => 'smtp.example.net']
+
+$config['smtp_server'] = 'vulnmail.local';
+
+// SMTP port. Use 25 for cleartext, 465 for Implicit TLS, or 587 for STARTTLS (default)
+
+$config['smtp_port'] = 25;
+
+// provide an URL where a user can get support for this Roundcube installation
+
+// PLEASE DO NOT LINK TO THE ROUNDCUBE.NET WEBSITE HERE!
+
+$config['support_url'] = '';
+
+// Location of temporary saved files such as attachments and cache files
+
+// must be writeable for the user who runs PHP process (Apache user if mod_php is being used)
+
+$config['temp_dir'] = '/var/www/html/roundcube/temp';
+
+// check client IP in session authorization
+
+$config['ip_check'] = false;
+
+// This key is used for encrypting purposes, like storing of imap password
+
+// in the session. For historical reasons it's called DES_key, but it's used
+
+// with any configured cipher_method (see below).
+
+// For the default cipher_method a required key length is 24 characters.
+
+$config['des_key'] = 'qBZ6fueGLsqWZfaJ8taVpGLX';
+
+// Automatically add this domain to user names for login
+
+// Only for IMAP servers that require full e-mail addresses for login
+
+// Specify an array with 'host' => 'domain' values to support multiple hosts
+
+// Supported replacement variables:
+
+// %h - user's IMAP hostname
+
+// %n - hostname ($_SERVER['SERVER_NAME'])
+
+// %t - hostname without the first part
+
+// %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
+
+// %z - IMAP domain (IMAP hostname without the first part)
+
+// For example %n = mail.domain.tld, %t = domain.tld
+
+$config['username_domain'] = '';
+
+// ----------------------------------
+
+// PLUGINS
+
+// ----------------------------------
+
+// List of active plugins (in plugins/ directory)
+
+$config['plugins'] = ['archive','zipdownload'];
+
+// the default locale setting (leave empty for auto-detection)
+
+// RFC1766 formatted language name like en_US, de_DE, de_CH, fr_FR, pt_BR
+
+$config['language'] = 'null';
+
+// Make use of the built-in spell checker.
+
+$config['enable_spellcheck'] = true;
+
+// Set the spell checking engine. Possible values:
+
+// - 'googie'  - the default (also used for connecting to Nox Spell Server, see 'spellcheck_uri' setting)
+
+// - 'pspell'  - requires the PHP Pspell module and aspell installed
+
+// - 'enchant' - requires the PHP Enchant module
+
+// - 'atd'     - install your own After the Deadline server or check with the people at http://www.afterthedeadline.com before using their API
+
+// Since Google shut down their public spell checking service, the default settings
+
+// connect to http://spell.roundcube.net which is a hosted service provided by Roundcube.
+
+// You can connect to any other googie-compliant service by setting 'spellcheck_uri' accordingly.
+
+$config['spellcheck_engine'] = false;
+//
+//
+$config['enable_installer'] = true;
+// Display remote resources (inline images, styles) in HTML messages. Default: 0.
+
+// 0 - Never, always ask
+
+// 1 - Allow from my contacts (all writeable addressbooks + collected senders and recipients)
+
+// 2 - Always allow
+
+// 3 - Allow from trusted senders only
+
+$config['show_images'] = true;
+
+//test
+
+$config['htmleditor'] = 1;
+
+//attachment
+
+$config['attachment_dir'] = '/var/www/html/roundcube/uploads';
+
